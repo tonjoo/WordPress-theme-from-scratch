@@ -31,6 +31,13 @@ function tutorial_setup() {
 	 * provide it for us.
 	 */
 	add_theme_support( 'title-tag' );
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/ featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
 }
 add_action( 'after_setup_theme', 'tutorial_setup' );
 
@@ -46,3 +53,35 @@ function tutorial_scripts() {
 	wp_enqueue_script( 'bootstrap', TUTORIAL_URL . '/assets/plugins/bootstrap/js/bootstrap.min.js', array(), '5.2.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'tutorial_scripts' );
+
+/**
+ * Display publish date.
+ */
+function tutorial_publish_date() {
+	echo sprintf(
+		/* translators: %s: time */
+		esc_html__( 'Published %s ago', 'tutorial' ),
+		esc_html( human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ) )
+	);
+}
+/**
+ * Display reading time.
+ */
+function tutorial_reading_time() {
+	$content = get_the_content( null, false, get_the_ID() );
+	$content = strip_shortcodes( $content );
+	$content = wp_strip_all_tags( $content );
+
+	$word_count = count( preg_split( '/\s+/', $content ) );
+
+	$wpm  = 161;
+	$time = ceil( $word_count / $wpm );
+	$time = max( 1, $time );
+
+	$read_time = sprintf(
+		/* translators: %s: Number of minutes. */
+		__( '%s min read', 'tutorial' ),
+		$time
+	);
+	echo esc_html( $read_time );
+}
