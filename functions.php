@@ -99,3 +99,39 @@ function tutorial_the_content( $content ) {
 	return $content;
 }
 add_filter( 'the_content', 'tutorial_the_content' );
+
+/**
+ * Display featured image caption
+ */
+function tutorial_post_thumbnail_caption() {
+	$thumbnail_id = get_post_thumbnail_id();
+	$thumbnail    = get_post( $thumbnail_id );
+	if ( ! empty( $thumbnail->post_excerpt ) ) {
+		echo '<figcaption class="mt-2 text-center image-caption">';
+		echo wp_kses_post( $thumbnail->post_excerpt );
+		echo '</figcaption>';
+	}
+}
+
+/**
+ * Display single post navigation
+ */
+function tutorial_post_navigation() {
+	$previous = get_previous_post_link(
+		'%link',
+		esc_html__( 'Previous', 'tutorial' ) . '<i class="arrow-prev fas fa-long-arrow-alt-left"></i>'
+	);
+	$next = get_next_post_link(
+		'%link',
+		esc_html__( 'Next', 'tutorial' ) . '<i class="arrow-next fas fa-long-arrow-alt-right"></i>'
+	);
+	$previous = str_replace( 'rel="prev"', 'rel="prev" class="nav-link-prev nav-item nav-link rounded-left"', $previous );
+	$next     = str_replace( 'rel="next"', 'rel="next" class="nav-link-next nav-item nav-link rounded-right"', $next );
+
+	if ( $previous || $next ) {
+		echo '<nav class="blog-nav nav nav-justified my-5">';
+		echo wp_kses_post( $previous );
+		echo wp_kses_post( $next );
+		echo '</nav';
+	}
+}
