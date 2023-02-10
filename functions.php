@@ -85,3 +85,17 @@ function tutorial_reading_time() {
 	);
 	echo esc_html( $read_time );
 }
+
+/**
+ * Generate a trimmed-down version of the full post content for archive & home
+ *
+ * @param  string $content Content of the current post.
+ * @return string
+ */
+function tutorial_the_content( $content ) {
+	if ( is_archive() || is_home() ) {
+		$content = wp_trim_words( $content, 36 );
+	}
+	return $content;
+}
+add_filter( 'the_content', 'tutorial_the_content' );
