@@ -10,6 +10,7 @@ define( 'TUTORIAL_DIR', get_template_directory() );
 define( 'TUTORIAL_URL', get_template_directory_uri() );
 
 include TUTORIAL_DIR . '/inc/class-profile-widget.php';
+include TUTORIAL_DIR . '/inc/class-options.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -93,6 +94,7 @@ function tutorial_publish_date() {
 		esc_html( human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ) )
 	);
 }
+
 /**
  * Display reading time.
  */

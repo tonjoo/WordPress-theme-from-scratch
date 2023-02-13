@@ -5,27 +5,28 @@
  * @package Tutorial
  */
 
+$options = get_option( 'tutorial_options' );
 get_header();
 ?>
 
-	<section class="cta-section theme-bg-light py-5">
-		<div class="container text-center single-col-max-width">
-			<h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
-			<div class="intro">Welcome to my blog. Subscribe and get my latest blog post in your inbox.</div>
-			<div class="single-form-max-width pt-3 mx-auto">
-				<form class="signup-form row g-2 g-lg-2 align-items-center">
-					<div class="col-12 col-md-9">
-						<label class="sr-only" for="semail">Your email</label>
-						<input type="email" id="semail" name="semail1" class="form-control me-md-1 semail" placeholder="Enter email">
-					</div>
-					<div class="col-12 col-md-2">
-						<button type="submit" class="btn btn-primary">Subscribe</button>
-					</div>
-				</form><!--//signup-form-->
-			</div><!--//single-form-max-width-->
-		</div><!--//container-->
-	</section>
+	<?php if ( ! empty( $options['cta_title'] ) ) : ?>
+		<section class="cta-section theme-bg-light py-5">
+			<div class="container text-center single-col-max-width">
+				<h2 class="heading"><?php echo esc_html( $options['cta_title'] ); ?></h2>
 
+				<?php if ( ! empty( $options['cta_description'] ) ) : ?>
+					<div class="intro"><?php echo wp_kses_post( $options['cta_description'] ); ?></div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $options['cta_form'] ) ) : ?>
+					<div class="single-form-max-width pt-3 mx-auto">
+						<?php echo do_shortcode( $options['cta_form'] ); ?>
+					</div><!--//single-form-max-width-->
+				<?php endif; ?>
+
+			</div><!--//container-->
+		</section>
+	<?php endif; ?>
 
 	<?php if ( have_posts() ) : ?>
 		<section class="blog-list px-3 py-5 p-md-5">

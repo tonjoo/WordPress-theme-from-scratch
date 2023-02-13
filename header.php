@@ -20,7 +20,7 @@
 <?php wp_body_open(); ?>
 
 	<header class="header text-center">
-		<h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="<?php echo esc_url( home_url( '/' ) ); ?>">Anthony's Blog</a></h1>
+		<h1 class="blog-name pt-lg-4 mb-0"><a class="no-text-decoration" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 
 		<nav class="navbar navbar-expand-lg navbar-dark" >
 
@@ -42,9 +42,15 @@
 				);
 				?>
 
-				<div class="my-2 my-md-3">
-					<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>
-				</div>
+				<?php
+				$options = get_option( 'tutorial_options' );
+				?>
+				<?php if ( ! empty( $options['contact_title'] ) && ! empty( $options['contact_url'] ) ) : ?>
+					<div class="my-2 my-md-3">
+						<a class="btn btn-primary" href="<?php echo esc_url( $options['contact_url'] ); ?>" target="_blank"><?php echo esc_html( $options['contact_title'] ); ?></a>
+					</div>
+				<?php endif; ?>
+
 			</div>
 		</nav>
 	</header>
