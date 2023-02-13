@@ -43,17 +43,15 @@
 					<hr>
 				</div><!--//profile-section-->
 
-				<ul class="navbar-nav flex-column text-start">
-					<li class="nav-item">
-						<a class="nav-link active" href="index.html"><i class="fas fa-home fa-fw me-2"></i>Blog Home <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="blog-post.html"><i class="fas fa-bookmark fa-fw me-2"></i>Blog Post</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="about.html"><i class="fas fa-user fa-fw me-2"></i>About Me</a>
-					</li>
-				</ul>
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'container'      => false,
+						'menu_class'     => 'navbar-nav flex-column text-start',
+					)
+				);
+				?>
 
 				<div class="my-2 my-md-3">
 					<a class="btn btn-primary" href="https://themes.3rdwavemedia.com/" target="_blank">Get in Touch</a>

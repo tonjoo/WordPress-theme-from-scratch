@@ -38,6 +38,13 @@ function tutorial_setup() {
 	 * @link https://developer.wordpress.org/themes/functionality/ featured-images-post-thumbnails/
 	 */
 	add_theme_support( 'post-thumbnails' );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus(
+		array(
+			'menu-1' => esc_html__( 'Primary', 'tutorial' ),
+		)
+	);
 }
 add_action( 'after_setup_theme', 'tutorial_setup' );
 
@@ -135,3 +142,38 @@ function tutorial_post_navigation() {
 		echo '</nav';
 	}
 }
+
+/**
+ * Add classes to menu item list
+ *
+ * @param  array $classes Classes.
+ * @param  obj   $item    Menu item object.
+ * @param  obj   $args    Menu arguments.
+ * @return array
+ */
+function tutorial_menu_item_list_class( $classes, $item, $args ) {
+	if ( 'menu-1' === $args->theme_location ) {
+		$classes[] = 'nav-item';
+	}
+	return $classes;
+}
+add_filter( 'nav_menu_css_class', 'tutorial_menu_item_list_class', 10, 3 );
+
+/**
+ * Add classes to menu item link
+ *
+ * @param  array $atts HTML attributes.
+ * @param  obj   $item Menu item object.
+ * @param  obj   $args Menu arguments.
+ * @return array
+ */
+function tutorial_menu_item_link_class( $atts, $item, $args ) {
+	if ( 'menu-1' === $args->theme_location ) {
+		$atts['class'] = 'nav-link';
+		if ( in_array( 'current-menu-item', $item->classes ) ) {
+			$atts['class'] .= ' active';
+		}
+	}
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'tutorial_menu_item_link_class', 10, 3 );
