@@ -51,10 +51,7 @@ get_header();
 					</div><!--//item-->
 				<?php endwhile; ?>
 
-				<nav class="blog-nav nav nav-justified my-5">
-				  <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-				  <a class="nav-link-next nav-item nav-link rounded" href="#">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-				</nav>
+				<?php tutorial_posts_navigation(); ?>
 
 			</div>
 		</section>

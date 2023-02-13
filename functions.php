@@ -166,6 +166,32 @@ function tutorial_post_navigation() {
 }
 
 /**
+ * Display posts navigation
+ */
+function tutorial_posts_navigation() {
+	global $paged, $wp_query;
+	if ( $wp_query->max_num_pages > 1 ) {
+		if ( ! $paged ) {
+			$paged = 1;
+		}
+		$nextpage = (int) $paged + 1;
+		$max_page = $wp_query->max_num_pages;
+
+		$prev_link = previous_posts( false );
+		$next_link = next_posts( $max_page, false );
+
+		echo '<nav class="blog-nav nav nav-justified my-5">';
+		if ( $paged > 1 ) {
+			echo '<a class="nav-link-prev nav-item nav-link rounded" href="' . esc_attr( $prev_link ) . '">' . esc_html__( 'Previous', 'tutorial' ) . '<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>&nbsp;';
+		}
+		if ( $nextpage <= $max_page ) {
+			echo '<a class="nav-link-next nav-item nav-link rounded" href="' . esc_attr( $next_link ) . '">' . esc_html__( 'Next', 'tutorial' ) . '<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>';
+		}
+		echo '</nav>';
+	}
+}
+
+/**
  * Add classes to menu item list
  *
  * @param  array $classes Classes.
