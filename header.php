@@ -29,19 +29,8 @@
 			</button>
 
 			<div id="navigation" class="collapse navbar-collapse flex-column" >
-				<div class="profile-section pt-3 pt-lg-0">
-					<img class="profile-image mb-3 rounded-circle mx-auto" src="assets/images/profile.png" alt="image" >
 
-					<div class="bio mb-3">Hi, my name is Anthony Doe. Briefly introduce yourself here. You can also provide a link to the about page.<br><a href="about.html">Find out more about me</a></div><!--//bio-->
-					<ul class="social-list list-inline py-3 mx-auto">
-						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
-						<li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
-					</ul><!--//social-list-->
-					<hr>
-				</div><!--//profile-section-->
+				<?php dynamic_sidebar( 'sidebar-1' ); ?>
 
 				<?php
 				wp_nav_menu(
